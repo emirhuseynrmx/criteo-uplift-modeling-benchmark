@@ -1,0 +1,14 @@
+econml
+kaggle
+lightgbm
+matplotlib
+numpy
+pandas
+polars
+pydantic>=2
+psutil
+pytest
+ruff
+scikit-learn
+seaborn
+shap

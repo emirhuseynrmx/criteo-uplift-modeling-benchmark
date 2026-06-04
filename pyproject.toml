@@ -1,0 +1,44 @@
+[project]
+name = "criteo-uplift-modeling-benchmark"
+version = "0.1.0"
+description = "Criteo uplift modeling benchmark with CLI, Kaggle downloader, assets, linting, and tests."
+requires-python = ">=3.10"
+dependencies = [
+  "kaggle",
+  "matplotlib",
+  "numpy",
+  "pandas",
+  "polars",
+  "pydantic>=2",
+]
+
+[project.optional-dependencies]
+benchmark = [
+  "econml",
+  "lightgbm",
+  "psutil",
+  "scikit-learn",
+  "seaborn",
+  "shap",
+]
+dev = [
+  "pytest",
+  "ruff",
+]
+
+[project.scripts]
+criteo-uplift = "criteo_uplift_benchmark.cli:main"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = []
+
+[tool.pytest.ini_options]
+addopts = "--basetemp=.pytest_tmp"
+testpaths = ["tests"]
+pythonpath = ["src"]

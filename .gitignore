@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.pytest_tmp/
+.ruff_cache/
+*.pyc
+data/
+*.zip
+*.csv
+*.csv.gz
+*.parquet
+.kaggle/

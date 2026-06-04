@@ -1,0 +1,39 @@
+import numpy as np
+
+from criteo_uplift_benchmark.metrics import auuc, group_uplift, qini_curve, top_decile_uplift
+
+
+def test_group_uplift_uses_treatment_assignment() -> None:
+    y = np.array([1, 0, 0, 0])
+    t = np.array([1, 1, 0, 0])
+
+    assert group_uplift(y, t) == 0.5
+
+
+def test_top_decile_uplift_uses_treatment_not_response_lift() -> None:
+    uplift = np.array([0.9, 0.8, 0.1, 0.0])
+    y = np.array([1, 0, 0, 0])
+    t = np.array([1, 0, 1, 0])
+
+    assert top_decile_uplift(uplift, y, t, pct=0.50) == 1.0
+
+
+def test_qini_curve_shapes() -> None:
+    uplift = np.array([0.4, 0.3, 0.2, 0.1])
+    y = np.array([1, 0, 1, 0])
+    t = np.array([1, 0, 1, 0])
+
+    qini, random_line, x = qini_curve(uplift, y, t)
+
+    assert len(qini) == len(uplift)
+    assert len(random_line) == len(uplift)
+    assert len(x) == len(uplift)
+
+
+def test_auuc_returns_float() -> None:
+    uplift = np.array([0.4, 0.3, 0.2, 0.1])
+    y = np.array([1, 0, 1, 0])
+    t = np.array([1, 0, 1, 0])
+
+    assert isinstance(auuc(uplift, y, t), float)
+
