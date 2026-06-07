@@ -4,6 +4,8 @@ __pycache__/
 .pytest_tmp/
 .ruff_cache/
 *.pyc
+.env
+.env.local
 data/
 *.zip
 *.csv
