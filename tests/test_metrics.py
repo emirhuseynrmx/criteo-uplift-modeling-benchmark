@@ -1,6 +1,9 @@
 import numpy as np
 
+from criteo_uplift_benchmark.config import BenchmarkConfig
 from criteo_uplift_benchmark.metrics import auuc, group_uplift, qini_curve, top_decile_uplift
+from criteo_uplift_benchmark.pipeline import build_evidence_checks
+from criteo_uplift_benchmark.schemas import SegmentSummary
 
 
 def test_group_uplift_uses_treatment_assignment() -> None:
@@ -36,4 +39,22 @@ def test_auuc_returns_float() -> None:
     t = np.array([1, 0, 1, 0])
 
     assert isinstance(auuc(uplift, y, t), float)
+
+
+def test_evidence_checks_flag_uncertain_winner() -> None:
+    class Split:
+        t_test = np.array([1, 0, 1, 0])
+
+    checks = build_evidence_checks(
+        config=BenchmarkConfig.quick(sample_size=100),
+        split=Split(),
+        winner="S-Learner",
+        runner_up="DR-Learner",
+        paired_diff_ci=(-1.0, 1.0),
+        segments=SegmentSummary(rows=[], avoidable_campaign_spend=0.0),
+    )
+
+    by_name = {check.check: check for check in checks}
+    assert by_name["winner_margin"].status == "review"
+    assert by_name["policy_segment_coverage"].status == "review"
 

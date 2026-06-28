@@ -126,3 +126,11 @@ class SegmentSummary(BaseModel):
 
     rows: list[SegmentRow]
     avoidable_campaign_spend: float
+
+
+class EvidenceCheck(BaseModel):
+    """Machine-readable evidence note for benchmark runs."""
+
+    check: str
+    status: Literal["pass", "review", "fail"]
+    evidence: str
