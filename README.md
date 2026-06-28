@@ -20,6 +20,7 @@ The core question is:
 - Visit and conversion outcome support
 - Runtime and sampled process RSS tracking
 - Kaggle dataset downloader
+- no synthetic fallback: benchmark runs require a real Criteo CSV
 - CLI through `start.py`
 - Ruff linting, pytest tests, and GitHub Actions CI
 

@@ -25,44 +25,14 @@ def resolve_data_path(config: BenchmarkConfig) -> Path | None:
     return Path(kaggle_matches[0]) if kaggle_matches else None
 
 
-def synthetic_data(config: BenchmarkConfig) -> pl.DataFrame:
-    """Create a small synthetic fallback for smoke tests."""
-    rng = np.random.default_rng(config.split.seed)
-    n = min(config.runtime.sample_size, 80_000)
-    treatment = rng.binomial(1, 0.85, n)
-    features = {
-        feature: rng.standard_normal(n).astype(np.float32)
-        for feature in config.dataset.feature_cols
-    }
-
-    logit = 0.6 * features["f0"] + 0.3 * features["f1"] - 0.2 * features["f2"]
-    base_visit = 1 / (1 + np.exp(-logit)) * 0.12
-    tau_visit = 0.02 + 0.05 * features["f0"] - 0.03 * features["f2"]
-    visit = rng.binomial(1, np.clip(base_visit + treatment * tau_visit, 0, 1), n)
-
-    base_conversion = np.clip(0.03 + 0.25 * visit + 0.01 * features["f3"], 0, 1)
-    tau_conversion = 0.005 + 0.015 * features["f0"] - 0.010 * features["f4"]
-    conversion = rng.binomial(
-        1,
-        np.clip(base_conversion + treatment * tau_conversion, 0, 1),
-        n,
-    )
-
-    return pl.DataFrame(
-        {
-            **features,
-            config.dataset.treatment_col: treatment,
-            config.dataset.primary_outcome_col: visit,
-            config.dataset.conversion_col: conversion,
-        }
-    )
-
-
 def load_data(config: BenchmarkConfig) -> pl.DataFrame:
-    """Load Criteo data or synthetic fallback."""
+    """Load Criteo data from a local file, data directory, or Kaggle mount."""
     data_path = resolve_data_path(config)
     if data_path is None:
-        return synthetic_data(config)
+        raise FileNotFoundError(
+            "Criteo uplift data was not found. Run `python start.py download --data-dir data` "
+            "or pass --data-path to a real Kaggle CSV."
+        )
 
     schema_names = pl.scan_csv(data_path).collect_schema().names()
     outcome_cols = [
