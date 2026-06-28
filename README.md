@@ -25,6 +25,12 @@ The core question is:
 
 ## Results From the 7M-Row Run
 
+## Sample Benchmark Report
+
+![Sample uplift benchmark report preview](docs/assets/sample-uplift-report-preview.png)
+
+[Open the sample PDF report](docs/samples/sample_uplift_benchmark_report.pdf)
+
 ![Accuracy vs runtime trade-off](assets/tradeoff_accuracy_runtime.png)
 
 | Model | Validation AUUC | Runtime (s) | Peak RSS (MB) |
