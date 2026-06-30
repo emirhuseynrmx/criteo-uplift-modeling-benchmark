@@ -1,0 +1,23 @@
+Metadata-Version: 2.4
+Name: criteo-uplift-modeling-benchmark
+Version: 0.1.0
+Summary: Criteo uplift modeling benchmark with CLI, Kaggle downloader, assets, linting, and tests.
+Requires-Python: >=3.10
+License-File: LICENSE
+Requires-Dist: kaggle
+Requires-Dist: matplotlib
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: polars
+Requires-Dist: pydantic>=2
+Provides-Extra: benchmark
+Requires-Dist: econml; extra == "benchmark"
+Requires-Dist: lightgbm; extra == "benchmark"
+Requires-Dist: psutil; extra == "benchmark"
+Requires-Dist: scikit-learn; extra == "benchmark"
+Requires-Dist: seaborn; extra == "benchmark"
+Requires-Dist: shap; extra == "benchmark"
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Dynamic: license-file

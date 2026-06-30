@@ -1,0 +1,2 @@
+[console_scripts]
+criteo-uplift = criteo_uplift_benchmark.cli:main
