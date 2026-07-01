@@ -7,6 +7,7 @@ dependencies = [
   "kaggle",
   "matplotlib",
   "numpy",
+  "optuna>=3.0",
   "pandas",
   "polars",
   "pydantic>=2",
