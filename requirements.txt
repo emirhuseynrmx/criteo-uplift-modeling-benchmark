@@ -3,6 +3,7 @@ kaggle
 lightgbm
 matplotlib
 numpy
+optuna
 pandas
 polars
 pydantic>=2
