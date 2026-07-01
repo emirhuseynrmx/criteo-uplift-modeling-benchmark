@@ -1,0 +1,14 @@
+﻿{
+  "run_at": "2026-07-01T06:29:39Z",
+  "runtime_seconds": 25.2,
+  "cli": "uv run criteo-uplift run --data-path data/criteo-synthetic.csv --sample-size 50000",
+  "data": "synthetic (50k rows, 12 features, Criteo schema)",
+  "treatment_rate": 0.850,
+  "visit_rate_treated": 0.6575,
+  "visit_rate_control": 0.6364,
+  "ate_estimate": 0.0211,
+  "conversion_rate": 0.2699,
+  "winner": "S-Learner",
+  "models_compared": ["Naive Response Ranker", "S-Learner", "T-Learner", "X-Learner"],
+  "outputs": ["outputs/benchmark_results.txt", "outputs/manifest.json"]
+}

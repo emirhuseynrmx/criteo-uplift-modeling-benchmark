@@ -12,3 +12,7 @@ data/
 *.csv.gz
 *.parquet
 .kaggle/
+outputs/*
+!outputs/.gitkeep
+!outputs/benchmark_results.txt
+!outputs/manifest.json

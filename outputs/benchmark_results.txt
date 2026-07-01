@@ -1,0 +1,7 @@
+﻿Winner: S-Learner
+Paired AUUC diff CI vs runner-up: [-36.69, 75.41]
+     split                 model       auuc  normalized_auuc  auuc_ci_low  auuc_ci_high  top_decile_uplift  top_decile_relative_uplift  population_uplift
+validation Naive Response Ranker  36.555518         0.004874   -26.894429     95.482330           0.043150                    1.986456           0.021722
+validation             S-Learner  16.202731         0.002160   -30.743017     75.610153           0.009103                    0.419044           0.021722
+validation             T-Learner  -4.299863        -0.000573   -49.903942     66.361530          -0.012380                   -0.569937           0.021722
+validation             X-Learner -12.992940        -0.001732   -64.207025     41.588454          -0.086258                   -3.970948           0.021722
